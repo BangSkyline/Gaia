@@ -23,7 +23,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "84:84"
+      - "85:80"
     depends_on:
       - gitea-db
     networks:
@@ -37,7 +37,7 @@ services:
     volumes:
       - ./jenkins_home:/var/jenkins_home
     ports:
-      - "84:84"
+      - "84:80"
     networks:
       cosmos:
         ipv4_address: 192.168.95.67
