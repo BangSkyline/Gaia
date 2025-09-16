@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  gitea-db:
+    build: ./postgres
+    restart: unless-stopped
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  gitea:
+    build: ./gitea
+    restart: unless-stopped
+    volumes:
+      - ./gitea_data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3001:3001"
+    depends_on:
+      - gitea-db
+
+  jenkins:
+    build: ./jenkins
+    restart: unless-stopped
+    user: root
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
