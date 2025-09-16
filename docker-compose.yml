@@ -5,6 +5,7 @@ services:
   gitea-db:
     image: postgres:15
     restart: unless-stopped
+    container_name: gaia-db
     environment:
       POSTGRES_DB: gitea
       POSTGRES_USER: gitea
@@ -18,6 +19,7 @@ services:
   gitea:
     build: ./Gitea
     restart: unless-stopped
+    container_name: gaia-git
     volumes:
       - ./gitea_data:/data
       - /etc/timezone:/etc/timezone:ro
@@ -33,6 +35,7 @@ services:
   jenkins:
     build: ./Jenkins
     restart: unless-stopped
+    container_name: gaia-cicd
     user: root
     volumes:
       - ./jenkins_home:/var/jenkins_home
@@ -40,7 +43,7 @@ services:
       cosmos:
         ipv4_address: 192.168.95.67
     ports:
-      - "84:80"
+      - "8080:80"
       - "50000:50000"
 
 networks:

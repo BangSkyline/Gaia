@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install -y git curl jq && rm -rf /var/lib/apt/list
 USER jenkins
 
 # Exposer les ports (déjà exposés dans l'image de base, mais explicite)
-EXPOSE 84 50000
+EXPOSE 8080 50000
