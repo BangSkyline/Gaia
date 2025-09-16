@@ -11,9 +11,9 @@ ENV GITEA__database__HOST=gitea-db:5432
 ENV GITEA__database__NAME=gitea
 ENV GITEA__database__USER=gitea
 ENV GITEA__database__PASSWD=gitea_pass
-ENV GITEA__server__DOMAIN=localhost
-ENV GITEA__server__HTTP_PORT=3001
-ENV GITEA__server__ROOT_URL=http://localhost:3001/
+ENV GITEA__server__DOMAIN=localhost:84
+ENV GITEA__server__HTTP_PORT=84
+ENV GITEA__server__ROOT_URL=http://localhost:84/
 
 # Exposer le port HTTP (Gitea)
-EXPOSE 3001
+EXPOSE 84

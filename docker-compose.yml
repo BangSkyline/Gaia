@@ -3,29 +3,46 @@ version: '3.8'
 services:
 
   gitea-db:
-    build: ./postgres
+    image: postgres:15
     restart: unless-stopped
+    environment:
+      POSTGRES_DB: gitea
+      POSTGRES_USER: gitea
+      POSTGRES_PASSWORD: gitea
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      cosmos:
+        ipv4_address: 192.168.95.66
 
   gitea:
-    build: ./gitea
+    build: ./Gitea
     restart: unless-stopped
     volumes:
       - ./gitea_data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "3001:3001"
+      - "84:84"
     depends_on:
       - gitea-db
+    networks:
+      cosmos:
+        ipv4_address: 192.168.95.65
 
   jenkins:
-    build: ./jenkins
+    build: ./Jenkins
     restart: unless-stopped
     user: root
     volumes:
       - ./jenkins_home:/var/jenkins_home
     ports:
-      - "8080:8080"
-      - "50000:50000"
+      - "84:84"
+    networks:
+      cosmos:
+        ipv4_address: 192.168.95.67
+
+networks:
+  cosmos:
+    external: true
+    name: cosmos
